@@ -236,6 +236,7 @@ define(function(require){
             var self = this;
 
             var elementPosition = $item.offset();
+            var elementWidth = $item.width();
             var offset = self.settings.offset;
 
             self.scrollTop = $(window).scrollTop();
@@ -250,7 +251,7 @@ define(function(require){
             var horizontalPosition = self.windowWidth + self.scrollLeft + offset;
 
             // make sure we are in or above the vertical viewport and insize the horizontal one
-            if (elementPosition.left > 0 && ((verticalPosition > elementPosition.top) && (horizontalPosition > elementPosition.left))) {
+            if (((elementPosition.left + elementWidth) > 0) && ((verticalPosition > elementPosition.top) && (horizontalPosition > elementPosition.left))) {
                 return true;
             } else {
                 return false;
