@@ -1,0 +1,22 @@
+{
+  "authors": [ {
+    "homepage": "http://www.perfectsensedigital.com/",
+    "name": "Perfect Sense Digital"
+  } ],
+  "dependencies": {
+    "jquery": ">=1.7.0",
+    "bsp-utils": ">=2.0.1"
+  },
+  "homepage": "https://github.com/perfectsense/brightspot-js-lazyimage",
+  "keywords": [
+    "brightspot",
+    "jquery"
+  ],
+  "license": "MIT",
+  "main": [
+    "bsp-lazyimage.js",
+    "lazy-loader-utility.js"
+  ],
+  "name": "bsp-lazyimage",
+  "version": "0.1.0"
+}
