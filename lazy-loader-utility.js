@@ -211,8 +211,6 @@ define(function(require){
         _loadImage: function($parent, $image) {
             var self = this;
 
-            console.log($image.attr('data-src'));
-
             var $tempImage = $('<img>').attr('src',$image.attr('data-src'));
 
             var preloader = $parent.find('.' + self.settings.preloaderIconClass).remove();
