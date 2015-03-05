@@ -164,14 +164,14 @@ define(function(require){
             // for normal images, we replace the src with data-src
             if($el.prop('tagName') === 'PICTURE') {
 
-                $preloader.remove();
-
                 // find every data-srcset, make a new srcset with that data
                 $el.find('[data-srcset]').each(function () {
                     $(this).attr('srcset', $(this).attr('data-srcset'));
                 });
 
                 $el.addClass(self.settings.loadedClass);
+
+                $preloader.remove();
 
                 // if we are using picture fill reevaluate so it will pick up the image
                 if (typeof(window.picturefill) === 'function') {
