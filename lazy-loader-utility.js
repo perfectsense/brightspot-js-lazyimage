@@ -171,12 +171,12 @@ define(function(require){
 
                 $el.addClass(self.settings.loadedClass);
 
-                $preloader.remove();
-
                 // if we are using picture fill reevaluate so it will pick up the image
                 if (typeof(window.picturefill) === 'function') {
                     window.picturefill({ 'reevaluate': true });
                 }
+
+                $preloader.remove();
 
             } else {
 
