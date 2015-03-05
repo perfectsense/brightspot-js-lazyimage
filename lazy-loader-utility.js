@@ -158,10 +158,13 @@ define(function(require){
             var self = this;
             var $el = $(el);
             var $lazyImage;
+            var $preloader = $el.find('.' + self.settings.preloaderIconClass);
 
             // for picturefill, we have to change all the data-srcsets to srcssets
             // for normal images, we replace the src with data-src
             if($el.prop('tagName') === 'PICTURE') {
+
+                $preloader.remove();
 
                 // find every data-srcset, make a new srcset with that data
                 $el.find('[data-srcset]').each(function () {
