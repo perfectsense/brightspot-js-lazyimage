@@ -15,18 +15,18 @@
  *
  * Examples of syntax:
  *
- * 1) <span data-bsp-lazyimage data-src="asdf.jpg" alt="asdf" class="asdf"></span>
+ * 1) <span data-bsp-lazyimage data-lazy="asdf.jpg" alt="asdf" class="asdf"></span>
  *
- * 2) <img data-bsp-lazyimage data-src="asdf.jpg" alt="asdf" class="asdf"></img>
+ * 2) <img data-bsp-lazyimage data-lazy="asdf.jpg" alt="asdf" class="asdf"></img>
  *
  * 3) <div data-bsp-lazyimage>
- *        <span data-src="asdf.jpg" alt="asdf" class="asdf"></span>
- *        <span data-src="asdf.jpg" alt="asdf" class="asdf"></span>
+ *        <span data-lazy="asdf.jpg" alt="asdf" class="asdf"></span>
+ *        <span data-lazy="asdf.jpg" alt="asdf" class="asdf"></span>
  *    </div>
  *
  * 4) <picture class="asdf" data-bsp-lazyimage>
- *        <source data-srcset="/asdf.jpg" media="(max-width: 767px)">
- *        <img data-srcset="asdf.jpg" alt="Responsive Image">
+ *        <source data-lazy="/asdf.jpg" media="(max-width: 767px)">
+ *        <img data-lazy="asdf.jpg" alt="Responsive Image">
  *    </picture>
  */
 

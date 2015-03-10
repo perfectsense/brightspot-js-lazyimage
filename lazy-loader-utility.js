@@ -1,8 +1,8 @@
 /*
  * Utility for lazy loading images
  *
- * This utility takes either a regular tag with a data-src and converts it to an image with src, or takes a picture element with
- * data-srcset and converts it to regular srcset attributes. It's compatible with (but does not need) picturefill, as it tries to
+ * This utility takes either a regular tag with a data-lazy and converts it to an image with src, or takes a picture element with
+ * data-lazy and converts it to regular srcset attributes. It's compatible with (but does not need) picturefill, as it tries to
  * call it if it exists.
   *
  * Usage:
@@ -24,18 +24,18 @@
  *
  * Examples of supported HTML syntax:
  *
- * 1) <span data-src="asdf.jpg" alt="asdf" class="asdf"></span>
+ * 1) <span data-lazy="asdf.jpg" alt="asdf" class="asdf"></span>
  *
- * 2) <img data-src="asdf.jpg" alt="asdf" class="asdf"></img>
+ * 2) <img data-lazy="asdf.jpg" alt="asdf" class="asdf"></img>
  *
  * 3) <div>
- *        <span data-src="asdf.jpg" alt="asdf" class="asdf"></span>
- *        <span data-src="asdf.jpg" alt="asdf" class="asdf"></span>
+ *        <span data-lazy="asdf.jpg" alt="asdf" class="asdf"></span>
+ *        <span data-lazy="asdf.jpg" alt="asdf" class="asdf"></span>
  *    </div>
  *
  * 4) <picture class="asdf">
- *        <source data-srcset="/asdf.jpg" media="(max-width: 767px)">
- *        <img data-srcset="asdf.jpg" alt="Responsive Image">
+ *        <source data-lazy="/asdf.jpg" media="(max-width: 767px)">
+ *        <img data-lazy="asdf.jpg" alt="Responsive Image">
  *    </picture>
  */
 
@@ -160,13 +160,13 @@ define(function(require){
             var $lazyImage;
             var $preloader = $el.find('.' + self.settings.preloaderIconClass);
 
-            // for picturefill, we have to change all the data-srcsets to srcssets
-            // for normal images, we replace the src with data-src
+            // for picturefill, we have to change all the data-lazy to srcssets
+            // for normal images, we replace the src with data-lazy
             if($el.prop('tagName') === 'PICTURE') {
 
                 // find every data-srcset, make a new srcset with that data
-                $el.find('[data-srcset]').each(function () {
-                    $(this).attr('srcset', $(this).attr('data-srcset'));
+                $el.find('[data-lazy]').each(function () {
+                    $(this).attr('srcset', $(this).attr('data-lazy'));
                 });
 
                 $el.addClass(self.settings.loadedClass);
@@ -181,10 +181,10 @@ define(function(require){
             } else {
 
                 // find the source
-                if($el.data('src')) {
+                if($el.data('lazy')) {
                     $lazyImage = $el;
                 } else {
-                    $lazyImage = $el.find('[data-src]');
+                    $lazyImage = $el.find('[data-lazy]');
                 }
 
                 // if we have an image to load, do it
@@ -214,7 +214,7 @@ define(function(require){
         _loadImage: function($parent, $image) {
             var self = this;
 
-            var $tempImage = $('<img>').attr('src',$image.attr('data-src'));
+            var $tempImage = $('<img>').attr('src',$image.attr('data-lazy'));
 
             var preloader = $parent.find('.' + self.settings.preloaderIconClass).remove();
 
@@ -224,7 +224,7 @@ define(function(require){
                 $image.replaceWith($('<img/>', {
                     'alt'   : $image.attr('alt'),
                     'class' : ($image.attr('class') || '') + ' ' + self.settings.loadedClass,
-                    'src'   : $image.attr('data-src'),
+                    'src'   : $image.attr('data-lazy'),
                     'title' : $image.attr('title')
                 }));
 
