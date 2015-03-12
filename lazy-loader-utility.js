@@ -66,11 +66,14 @@ define(function(require){
 
             $.extend(self.settings, options);
 
+            self.modernBrowser = window.MutationObserver || window.WebKitMutationObserver;
+
         },
 
         // Public function to add items to array we check against. We allow additional options here so you
         // can override the defaults, or initial items, per new set of items
         addItems: function(items, options) {
+
             var self = this;
 
             $.extend(self.settings, options);
@@ -106,7 +109,7 @@ define(function(require){
 
             // we check the mutation observer if it's around. What this allows us to do is only lazy load items that are visible at first
             // and as things become visible in the DOM, we go ahead and lazy load them
-            if (MutationObserver) {
+            if (self.modernBrowser) {
                 new MutationObserver(bsp_utils.throttle(self.settings.throttleInterval, checkItemClosure)).observe(self.settings.context, {
                     'childList'     : true,
                     'subtree'       : true,
@@ -133,7 +136,8 @@ define(function(require){
                 var visible = $item.is(":visible");
 
                 // if you are visible, do stuff. If you are, just move on to the next item
-                if (visible) {
+                // here we also check if you're a not modern browser. If you are old, we skip the visible check
+                if (visible || !self.modernBrowser) {
                     // if you are in the viewport, then render the image, and remove yourself from the array, since you're loaded
                     // if you aren't in the viewport, move on and check the next item
                     if(self._isInViewportOrAbove($item)) {
