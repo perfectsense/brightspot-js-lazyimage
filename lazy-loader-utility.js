@@ -49,11 +49,12 @@ define(function(require){
     var lazyLoader = {
 
         settings: {
+            'checkVisibility'   : false,
             'context'           : document,
-            'offset'            : 250,
-            'throttleInterval'  : 250,
             'loadedClass'       : 'lazy-loaded',
-            'preloaderIconClass': 'uvn-picture_spinner'
+            'offset'            : 250,
+            'preloaderIconClass': 'uvn-picture_spinner',
+            'throttleInterval'  : 250            
         },
 
         // this is just used right now to override any of the default settings.
@@ -133,7 +134,12 @@ define(function(require){
             for (var i=0; i < self.items.length;) {
 
                 var $item = $(self.items[i]);
-                var visible = $item.is(":visible");
+                var visible = true; 
+
+                // by default, we just check the viewport. If we want the optional visibility check, dooo it
+                if (self.settings.checkVisibility) {
+                    visible = $item.is(":visible");
+                }
 
                 // if you are visible, do stuff. If you are, just move on to the next item
                 // here we also check if you're a not modern browser. If you are old, we skip the visible check
