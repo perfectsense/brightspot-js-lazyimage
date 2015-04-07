@@ -246,14 +246,10 @@ define(function(require){
             // we have the option to allow for native image loading, or the arguably better UX option to let the images just pop in when they are ready
             if(self.settings.nativeImageLoading) {
 
-                console.log('just replacing');
-
                 replaceImage();
                 
 
             } else {
-
-                console.log('full fancy load');
 
                 // this is the temp image that we'll check for smoother loading
                 var $tempImage = $('<img>').attr('src', imagePath);
