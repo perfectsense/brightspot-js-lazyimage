@@ -52,6 +52,7 @@ define(function(require){
             'checkVisibility'   : false,
             'context'           : document,
             'loadedClass'       : 'lazy-loaded',
+            'nativeImageLoading': true,
             'offset'            : 250,
             'preloaderIconClass': 'uvn-picture_spinner',
             'throttleInterval'  : 250            
@@ -224,21 +225,53 @@ define(function(require){
         _loadImage: function($parent, $image) {
             var self = this;
 
-            var $tempImage = $('<img>').attr('src',$image.attr('data-lazy'));
+            // we grab the image path, had some issues pulling this later, so we're grabbing and caching now, it's always here now
+            var imagePath = $image.attr('data-lazy');
 
-            var preloader = $parent.find('.' + self.settings.preloaderIconClass).remove();
+            // cache the preloader if exists
+            var preloader = $parent.find('.' + self.settings.preloaderIconClass);
 
-            $tempImage.on('load', function() {
-
-                // replace
+            function replaceImage() {
+                preloader.remove();
+                    
+                // replace image
                 $image.replaceWith($('<img/>', {
                     'alt'   : $image.attr('alt'),
                     'class' : ($image.attr('class') || '') + ' ' + self.settings.loadedClass,
-                    'src'   : $image.attr('data-lazy'),
+                    'src'   : imagePath,
                     'title' : $image.attr('title')
                 }));
+            }
 
-            });
+            // we have the option to allow for native image loading, or the arguably better UX option to let the images just pop in when they are ready
+            if(self.settings.nativeImageLoading) {
+
+                console.log('just replacing');
+
+                replaceImage();
+                
+
+            } else {
+
+                console.log('full fancy load');
+
+                // this is the temp image that we'll check for smoother loading
+                var $tempImage = $('<img>').attr('src', imagePath);
+
+                // now that we are loaded
+                $tempImage.one('load', function() {
+                    
+                    replaceImage();
+
+                }).each(function() {
+
+                    // gets around issues with caches images not triggering load sometimes
+                    if(this.complete) { 
+                        $(this).load(); 
+                    }
+                });
+
+            }
 
         },
 
