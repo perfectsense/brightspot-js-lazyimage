@@ -234,13 +234,18 @@ define(function(require){
             function replaceImage() {
                 preloader.remove();
                     
-                // replace image
-                $image.replaceWith($('<img/>', {
-                    'alt'   : $image.attr('alt'),
-                    'class' : ($image.attr('class') || '') + ' ' + self.settings.loadedClass,
-                    'src'   : imagePath,
-                    'title' : $image.attr('title')
-                }));
+                // make sure we have an image path and something weird did not happen. Had an edge case where slick carousel would
+                // intercept the data-lazy tags and do its own lazy loading, but the time did animation frame and got here, the image 
+                // was already lazy loaded for us and the data-lazy was gone, so the image path was undefined                
+                if(imagePath) {
+                    // replace image
+                    $image.replaceWith($('<img/>', {
+                        'alt'   : $image.attr('alt'),
+                        'class' : ($image.attr('class') || '') + ' ' + self.settings.loadedClass,
+                        'src'   : imagePath,
+                        'title' : $image.attr('title')
+                    }));
+                }
             }
 
             // we have the option to allow for native image loading, or the arguably better UX option to let the images just pop in when they are ready
