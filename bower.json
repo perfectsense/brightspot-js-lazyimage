@@ -15,8 +15,8 @@
   "license": "MIT",
   "main": [
     "bsp-lazyimage.js",
-    "lazy-loader-utility.js"
+    "bsp-lazyimage-plugin.js"
   ],
   "name": "bsp-lazyimage",
-  "version": "1.0.0"
+  "version": "1.0.1"
 }
