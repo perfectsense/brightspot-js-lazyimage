@@ -9,7 +9,7 @@ Examples:
 
     1)  <span data-bsp-lazyimage data-src="asdf.jpg" alt="asdf" class="asdf"></span>
     
-    2)  <img data-bsp-lazyimage data-src="asdf.jpg" alt="asdf" class="asdf"></img>
+    2)  <img data-bsp-lazyimage data-src="asdf.jpg" alt="asdf" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" class="asdf" /> (the base 64 in the src field is a blank gif, which validates correctly)
 
     3)  <div data-bsp-lazyimage>
             <span data-src="asdf.jpg" alt="asdf" class="asdf"></span>
@@ -18,7 +18,7 @@ Examples:
 
     4)  <picture class="asdf" data-bsp-lazyimage>
             <source data-srcset="/asdf.jpg" media="(max-width: 767px)">
-            <img data-srcset="asdf.jpg" alt="Responsive Image">
+            <img data-srcset="asdf.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Responsive Image">
         </picture>
 
 

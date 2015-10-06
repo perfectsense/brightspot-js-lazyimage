@@ -30,36 +30,28 @@
  *    </picture>
  */
 
-define(function(require){
+import $ from 'jquery';
+import bsp_utils from 'bsp-utils';
+import bsp_lazyimage from './bsp-lazyimage';
 
-    'use strict';
+export default bsp_utils.plugin(false, 'bsp', 'lazyimage', {
+    // when we install the plugin, we create our instance, which setup up the event bindings
+    _install: function() {
+        var self = this;
 
-    var $           = require('jquery');
-    var bsp_utils   = require('bsp-utils');
-    var lazyLoader  = require('lazy-loader-utility');
+        self.lazyLoaderInstance = Object.create(bsp_lazyimage);
 
-    var thePlugin = {
+        self.lazyLoaderInstance.init(document);
 
-        // when we install the plugin, we create our instance, which setup up the event bindings
-        _install: function() {
-            var self = this;
+        self.lazyLoaderInstance.createCheckListeners();
+    },
 
-            self.lazyLoaderInstance = Object.create(lazyLoader);
+    // each time stuff gets added to the DOM, pass everything that was added to the the lazy loader instance
+    '_all': function(items) {
+        var self = this;
 
-            self.lazyLoaderInstance.init(document);
-
-            self.lazyLoaderInstance.createCheckListeners();
-        },
-
-        // each time stuff gets added to the DOM, pass everything that was added to the the lazy loader instance
-        '_all': function(items) {
-            var self = this;
-
-            // self.option(item) allows us to set overrides to the lazy loader utility in the DOM
-            // ex: <html lang="en" data-bsp-lazyimage-options='{"loadedClass":"uvn-lazy-loaded"}'>
-            self.lazyLoaderInstance.addItems(items, self.option(items));
-        }
-    };
-
-    return bsp_utils.plugin(false, 'bsp', 'lazyimage', thePlugin);
+        // self.option(item) allows us to set overrides to the lazy loader utility in the DOM
+        // ex: <html lang="en" data-bsp-lazyimage-options='{"loadedClass":"uvn-lazy-loaded"}'>
+        self.lazyLoaderInstance.addItems(items, self.option(items));
+    }
 });
