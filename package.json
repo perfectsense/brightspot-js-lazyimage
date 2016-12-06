@@ -1,0 +1,19 @@
+{
+  "name": "brightspot-js-lazyimage",
+  "version": "1.0.1",
+  "description": "It's recommended that this plugin is used inside of the require/AMD space and using the brightspot-js-grunt task, as demonstrated in the BSP-101 project - Pull in via your bower.json. It will be automatically included into your project by brightspot-js-grunt task - Add \"bsp-lazyimage\" into your compile.js to have it be included in your JS output - Add in your markup",
+  "main": "bsp-lazyimage-plugin.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/perfectsense/brightspot-js-lazyimage.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/perfectsense/brightspot-js-lazyimage/issues"
+  },
+  "homepage": "https://github.com/perfectsense/brightspot-js-lazyimage#readme"
+}
